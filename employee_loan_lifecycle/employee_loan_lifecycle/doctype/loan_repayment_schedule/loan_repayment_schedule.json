@@ -9,6 +9,7 @@
  "field_order": [
   "section_break_lssn",
   "period_no",
+  "row_type",
   "due_date",
   "opening_balance",
   "instalment_amount",
@@ -16,13 +17,16 @@
   "principal_amount",
   "closing_balance",
   "recovered_amount",
+  "principal_recovered",
+  "interest_recovered",
   "status"
  ],
  "fields": [
   {
    "fieldname": "section_break_lssn",
    "fieldtype": "Section Break",
-   "label": "Repayment Schedule"
+   "label": "Repayment Schedule",
+   "read_only": 1
   },
   {
    "fieldname": "period_no",
@@ -30,7 +34,16 @@
    "label": "Period No",
    "description": "1-based repayment period number.",
    "reqd": 1,
-   "in_list_view": 1
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "row_type",
+   "fieldtype": "Select",
+   "label": "Row Type",
+   "options": "Instalment\nPrepayment",
+   "default": "Instalment",
+   "read_only": 1
   },
   {
    "fieldname": "due_date",
@@ -38,14 +51,15 @@
    "label": "Due Date",
    "description": "Payroll period to which this instalment belongs.",
    "reqd": 1,
-   "in_list_view": 1
+   "in_list_view": 1,
+   "read_only": 1
   },
   {
    "fieldname": "opening_balance",
    "fieldtype": "Currency",
    "label": "Opening Balance",
    "reqd": 1,
-   "in_list_view": 1
+   "read_only": 1
   },
   {
    "fieldname": "instalment_amount",
@@ -53,14 +67,16 @@
    "label": "Instalment Amount",
    "description": "The final period may differ from the regular instalment.",
    "reqd": 1,
-   "in_list_view": 1
+   "in_list_view": 1,
+   "read_only": 1
   },
   {
    "fieldname": "interest_amount",
    "fieldtype": "Currency",
    "label": "Interest Amount",
    "reqd": 1,
-   "in_list_view": 1
+   "in_list_view": 1,
+   "read_only": 1
   },
   {
    "fieldname": "principal_amount",
@@ -68,14 +84,17 @@
    "label": "Principal Amount",
    "description": "Principal portions must total the amount disbursed.",
    "reqd": 1,
-   "in_list_view": 1
+   "in_list_view": 1,
+   "read_only": 1
   },
   {
    "fieldname": "closing_balance",
    "fieldtype": "Currency",
    "label": "Closing Balance",
    "description": "Must be zero in the final period.",
-   "reqd": 1
+   "reqd": 1,
+   "read_only": 1,
+   "in_list_view": 1
   },
   {
    "fieldname": "recovered_amount",
@@ -84,7 +103,22 @@
    "description": "Amount actually recovered. May be less than the scheduled instalment.",
    "default": "0",
    "reqd": 1,
-   "in_list_view": 1
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "principal_recovered",
+   "fieldtype": "Currency",
+   "label": "Principal Recovered",
+   "read_only": 1,
+   "default": "0"
+  },
+  {
+   "fieldname": "interest_recovered",
+   "fieldtype": "Currency",
+   "label": "Interest Recovered",
+   "read_only": 1,
+   "default": "0"
   },
   {
    "fieldname": "status",
@@ -93,7 +127,8 @@
    "options": "Pending\nPartially Recovered\nRecovered\nSkipped",
    "default": "Pending",
    "reqd": 1,
-   "in_list_view": 1
+   "in_list_view": 1,
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,

@@ -1,0 +1,26 @@
+[
+ {
+  "doctype": "Role",
+  "name": "Reporting Manager",
+  "role_name": "Reporting Manager",
+  "desk_access": 1
+ },
+ {
+  "doctype": "Role",
+  "name": "Finance Manager",
+  "role_name": "Finance Manager",
+  "desk_access": 1
+ },
+ {
+  "doctype": "Role",
+  "name": "Treasury Officer",
+  "role_name": "Treasury Officer",
+  "desk_access": 1
+ },
+ {
+  "doctype": "Role",
+  "name": "CFO",
+  "role_name": "CFO",
+  "desk_access": 1
+ }
+]

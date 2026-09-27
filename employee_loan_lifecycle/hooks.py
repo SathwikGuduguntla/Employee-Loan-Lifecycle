@@ -37,49 +37,39 @@ has_permission = {
     "loan_repayment.loan_repayment.has_permission",
 }
 
-# Document Events
-# ---------------
-# Salary Slip integration (payroll deduction, retrospective correction is
-# a separate whitelisted call — see salary_slip_hooks.py) and the
-# Employee-exit block.
+# Salary Slip
+# -----------
+# The payroll deduction lives in an override class rather than doc_events:
+# it has to run *inside* HRMS's net pay calculation (set_net_pay), which no
+# document event reaches. See DECISIONS.md §6.
+
+override_doctype_class = {
+    "Salary Slip": "employee_loan_lifecycle.overrides.salary_slip.LoanSalarySlip",
+}
 
 doc_events = {
-    "Salary Slip": {
-        "validate": "employee_loan_lifecycle.salary_slip_hooks.preview_recoveries",
-        "on_submit": "employee_loan_lifecycle.salary_slip_hooks.apply_recoveries",
-        "on_cancel": "employee_loan_lifecycle.salary_slip_hooks.reverse_recoveries",
-    },
     "Employee": {
-        "validate": "employee_loan_lifecycle.salary_slip_hooks.block_exit_with_outstanding_loan",
+        "validate": "employee_loan_lifecycle.overrides.employee.block_exit_with_outstanding_loan",
     },
 }
 
-# Installation
-# ------------
-# No after_install/after_migrate hook — the "Loan Recovery" Salary
-# Component salary_slip_hooks.py deducts against is created once by hand
-# instead (Payroll > Salary Component > New, Type = Deduction, name it
-# exactly "Loan Recovery"). See DECISIONS.md.
-
 # Fixtures
 # --------
-
-# No Workflow fixture — both Loan Application and Loan Disbursement are
-# driven entirely through whitelisted controller methods (take_action() /
-# finance_verify() / treasury_release() / mark_disbursed() /
-# cancel_disbursement()) plus client-script buttons, not the stock
-# Workflow doctype. See DECISIONS.md §1 and the Loan Disbursement addendum
-# for why: a Workflow's role-only "allowed" gate can't express the
-# verifier-≠-releaser check or trigger Payment Entry creation, so a
-# Workflow sitting alongside these methods let someone bypass both by
-# using the Workflow's own action buttons instead.
+# Loan Application approvals run through LoanApplication.take_action()
+# against the Loan Approval Rule matrix, and Loan Disbursement through its
+# own finance_verify() / treasury_release() methods, so no Workflow is
+# shipped (DECISIONS.md §1).
 
 fixtures = [
     {
         "dt": "Custom Field",
         "filters": [
             ["dt", "=", "Salary Slip"],
-            ["fieldname", "=", "custom_loan_recoveries"],
+            ["fieldname", "in", ["loan_recovery_section", "loan_recoveries", "total_loan_repayment", "loan_journal_entry"]],
         ],
+    },
+    {
+        "dt": "Role",
+        "filters": [["name", "in", ["Reporting Manager", "Finance Manager", "Treasury Officer", "CFO"]]],
     },
 ]

@@ -1,269 +1,356 @@
-
 {
-  "actions": [],
-  "allow_copy": 0,
-  "allow_import": 1,
-  "allow_rename": 0,
-  "autoname": "LOAN-.YYYY.-.#####",
-  "creation": "2026-09-26 12:51:28.542933",
-  "doctype": "DocType",
-  "engine": "InnoDB",
-  "field_order": [
-    "section_break_identity",
-    "loan_application",
-    "employee",
-    "employee_name",
-    "company",
-    "loan_type",
-    "section_break_terms",
-    "interest_mode",
-    "rate_of_interest",
-    "tenure_months",
-    "sanctioned_amount",
-    "first_deduction_month",
-    "section_break_balances",
-    "disbursed_amount",
-    "principal_recovered",
-    "interest_recovered",
-    "outstanding_principal",
-    "outstanding_interest",
-    "arrears_amount",
-    "repayment_schedule",
-    "section_break_state",
-    "status",
-    "closure_date",
-    "section_break_accounts",
-    "loan_account",
-    "interest_account",
-    "writeoff_account",
-    "section_break_amendment",
-    "amended_from"
-  ],
-  "fields": [
-    {
-      "fieldname": "section_break_identity",
-      "fieldtype": "Section Break",
-      "label": "Identity"
-    },
-    {
-      "fieldname": "loan_application",
-      "fieldtype": "Link",
-      "label": "Loan Application",
-      "options": "Loan Application",
-      "read_only": 1,
-      "no_copy": 1,
-      "search_index": 1
-    },
-    {
-      "fieldname": "employee",
-      "fieldtype": "Link",
-      "label": "Employee",
-      "options": "Employee",
-      "reqd": 1,
-      "in_list_view": 1,
-      "search_index": 1
-    },
-    {
-      "fieldname": "employee_name",
-      "fieldtype": "Data",
-      "label": "Employee Name",
-      "fetch_from": "employee.employee_name",
-      "read_only": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "company",
-      "fieldtype": "Link",
-      "label": "Company",
-      "options": "Company",
-      "reqd": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "loan_type",
-      "fieldtype": "Link",
-      "label": "Loan Type",
-      "options": "Loan Type",
-      "reqd": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "section_break_terms",
-      "fieldtype": "Section Break",
-      "label": "Terms - Frozen at Sanction"
-    },
-    {
-      "fieldname": "interest_mode",
-      "fieldtype": "Select",
-      "label": "Interest Mode",
-      "options": "Flat\nReducing Balance",
-      "reqd": 1
-    },
-    {
-      "fieldname": "rate_of_interest",
-      "fieldtype": "Percent",
-      "label": "Annual Rate of Interest",
-      "reqd": 1
-    },
-    {
-      "fieldname": "tenure_months",
-      "fieldtype": "Int",
-      "label": "Tenure (Months)",
-      "reqd": 1
-    },
-    {
-      "fieldname": "sanctioned_amount",
-      "fieldtype": "Currency",
-      "label": "Sanctioned Amount",
-      "description": "Ceiling for total disbursement.",
-      "reqd": 1
-    },
-    {
-      "fieldname": "first_deduction_month",
-      "fieldtype": "Date",
-      "label": "First Deduction Month",
-      "reqd": 1
-    },
-    {
-      "fieldname": "section_break_balances",
-      "fieldtype": "Section Break",
-      "label": "Running Balances - Computed"
-    },
-    {
-      "fieldname": "disbursed_amount",
-      "fieldtype": "Currency",
-      "label": "Disbursed Amount",
-      "description": "Sum of submitted disbursements.",
-      "default": "0",
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "principal_recovered",
-      "fieldtype": "Currency",
-      "label": "Principal Recovered",
-      "default": "0"
-    },
-    {
-      "fieldname": "interest_recovered",
-      "fieldtype": "Currency",
-      "label": "Interest Recovered",
-      "default": "0"
-    },
-    {
-      "fieldname": "outstanding_principal",
-      "fieldtype": "Currency",
-      "label": "Outstanding Principal",
-      "default": "0",
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "outstanding_interest",
-      "fieldtype": "Currency",
-      "default": "0"
-    },
-    {
-      "fieldname": "arrears_amount",
-      "fieldtype": "Currency",
-      "label": "Arrears Amount",
-      "description": "Instalments due but not recovered.",
-      "default": "0"
-    },
-    {
-      "fieldname": "repayment_schedule",
-      "fieldtype": "Table",
-      "label": "Repayment Schedule",
-      "options": "Loan Repayment Schedule"
-    },
-    {
-      "fieldname": "section_break_state",
-      "fieldtype": "Section Break",
-      "label": "State"
-    },
-    {
-      "fieldname": "status",
-      "fieldtype": "Select",
-      "label": "Status",
-      "options": "Sanctioned\nPartially Disbursed\nDisbursed\nRepaying\nClosed\nWritten Off",
-      "default": "Sanctioned",
-      "reqd": 1,
-      "in_list_view": 1
-    },
-    {
-      "fieldname": "closure_date",
-      "fieldtype": "Date",
-      "label": "Closure Date"
-    },
-    {
-      "fieldname": "section_break_accounts",
-      "fieldtype": "Section Break",
-      "label": "Accounts"
-    },
-    {
-      "fieldname": "loan_account",
-      "fieldtype": "Link",
-      "label": "Loan Account",
-      "options": "Account",
-      "reqd": 1
-    },
-    {
-      "fieldname": "interest_account",
-      "fieldtype": "Link",
-      "label": "Interest Account",
-      "options": "Account",
-      "reqd": 1
-    },
-    {
-      "fieldname": "writeoff_account",
-      "fieldtype": "Link",
-      "label": "Write-off Account",
-      "options": "Account",
-      "reqd": 1
-    },
-    {
-      "fieldname": "section_break_amendment",
-      "fieldtype": "Section Break",
-      "label": "Amendment"
-    },
-    {
-      "fieldname": "amended_from",
-      "fieldtype": "Link",
-      "label": "Amended From",
-      "options": "Loan",
-      "no_copy": 1,
-      "print_hide": 1,
-      "read_only": 1,
-      "search_index": 1
-    }
-  ],
-  "grid_page_length": 50,
-  "index_web_pages_for_search": 1,
-  "is_submittable": 1,
-  "links": [],
-  "modified": "2026-09-26 12:51:39.413150",
-  "modified_by": "Administrator",
-  "module": "Employee Loan Lifecycle",
-  "name": "Loan",
-  "naming_rule": "Expression",
-  "owner": "Administrator",
-  "permissions": [
-    {
-      "create": 1,
-      "delete": 1,
-      "email": 1,
-      "export": 1,
-      "print": 1,
-      "read": 1,
-      "report": 1,
-      "role": "System Manager",
-      "share": 1,
-      "submit": 1,
-      "write": 1
-    }
-  ],
-  "row_format": "Dynamic",
-  "rows_threshold_for_grid_search": 20,
-  "sort_field": "creation",
-  "sort_order": "DESC",
-  "states": [],
-  "track_changes": 1
+ "actions": [],
+ "allow_copy": 0,
+ "allow_import": 1,
+ "allow_rename": 0,
+ "autoname": "LOAN-.YYYY.-.#####",
+ "creation": "2026-09-26 12:51:28.542933",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_identity",
+  "loan_application",
+  "employee",
+  "employee_name",
+  "company",
+  "loan_type",
+  "section_break_terms",
+  "interest_mode",
+  "rate_of_interest",
+  "tenure_months",
+  "sanctioned_amount",
+  "first_deduction_month",
+  "section_break_balances",
+  "disbursed_amount",
+  "principal_recovered",
+  "interest_recovered",
+  "outstanding_principal",
+  "outstanding_interest",
+  "arrears_amount",
+  "repayment_schedule",
+  "section_break_state",
+  "status",
+  "closure_date",
+  "section_break_accounts",
+  "loan_account",
+  "interest_account",
+  "writeoff_account",
+  "section_break_amendment",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_identity",
+   "fieldtype": "Section Break",
+   "label": "Identity"
+  },
+  {
+   "fieldname": "loan_application",
+   "fieldtype": "Link",
+   "label": "Loan Application",
+   "options": "Loan Application",
+   "read_only": 1,
+   "no_copy": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1,
+   "in_list_view": 1,
+   "search_index": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "fetch_from": "employee.employee_name",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "loan_type",
+   "fieldtype": "Link",
+   "label": "Loan Type",
+   "options": "Loan Type",
+   "reqd": 1,
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_terms",
+   "fieldtype": "Section Break",
+   "label": "Terms - Frozen at Sanction"
+  },
+  {
+   "fieldname": "interest_mode",
+   "fieldtype": "Select",
+   "label": "Interest Mode",
+   "options": "Flat\nReducing Balance",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "rate_of_interest",
+   "fieldtype": "Percent",
+   "label": "Annual Rate of Interest",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "tenure_months",
+   "fieldtype": "Int",
+   "label": "Tenure (Months)",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "sanctioned_amount",
+   "fieldtype": "Currency",
+   "label": "Sanctioned Amount",
+   "description": "Ceiling for total disbursement.",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "first_deduction_month",
+   "fieldtype": "Date",
+   "label": "First Deduction Month",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "section_break_balances",
+   "fieldtype": "Section Break",
+   "label": "Running Balances - Computed"
+  },
+  {
+   "fieldname": "disbursed_amount",
+   "fieldtype": "Currency",
+   "label": "Disbursed Amount",
+   "description": "Sum of submitted disbursements.",
+   "default": "0",
+   "in_list_view": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "principal_recovered",
+   "fieldtype": "Currency",
+   "label": "Principal Recovered",
+   "default": "0",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "interest_recovered",
+   "fieldtype": "Currency",
+   "label": "Interest Recovered",
+   "default": "0",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "outstanding_principal",
+   "fieldtype": "Currency",
+   "label": "Outstanding Principal",
+   "default": "0",
+   "in_list_view": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "outstanding_interest",
+   "fieldtype": "Currency",
+   "default": "0",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "arrears_amount",
+   "fieldtype": "Currency",
+   "label": "Arrears Amount",
+   "description": "Instalments due but not recovered.",
+   "default": "0",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "repayment_schedule",
+   "fieldtype": "Table",
+   "label": "Repayment Schedule",
+   "options": "Loan Repayment Schedule",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "section_break_state",
+   "fieldtype": "Section Break",
+   "label": "State"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Sanctioned\nPartially Disbursed\nDisbursed\nRepaying\nClosed\nWritten Off",
+   "default": "Sanctioned",
+   "reqd": 1,
+   "in_list_view": 1,
+   "read_only": 1,
+   "no_copy": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "closure_date",
+   "fieldtype": "Date",
+   "label": "Closure Date",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "section_break_accounts",
+   "fieldtype": "Section Break",
+   "label": "Accounts"
+  },
+  {
+   "fieldname": "loan_account",
+   "fieldtype": "Link",
+   "label": "Loan Account",
+   "options": "Account",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "interest_account",
+   "fieldtype": "Link",
+   "label": "Interest Account",
+   "options": "Account",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "writeoff_account",
+   "fieldtype": "Link",
+   "label": "Write-off Account",
+   "options": "Account",
+   "reqd": 1,
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "section_break_amendment",
+   "fieldtype": "Section Break",
+   "label": "Amendment"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "Loan",
+   "no_copy": 1,
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-09-26 12:51:39.413150",
+ "modified_by": "Administrator",
+ "module": "Employee Loan Lifecycle",
+ "name": "Loan",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "role": "Finance Manager",
+   "read": 1,
+   "print": 1,
+   "email": 1,
+   "report": 1,
+   "permlevel": 0,
+   "export": 1
+  },
+  {
+   "role": "CFO",
+   "read": 1,
+   "print": 1,
+   "email": 1,
+   "report": 1,
+   "permlevel": 0,
+   "export": 1
+  },
+  {
+   "role": "HR Manager",
+   "read": 1,
+   "print": 1,
+   "email": 1,
+   "report": 1,
+   "permlevel": 0
+  },
+  {
+   "role": "Reporting Manager",
+   "read": 1,
+   "print": 1,
+   "email": 1,
+   "report": 1,
+   "permlevel": 0
+  },
+  {
+   "role": "Treasury Officer",
+   "read": 1,
+   "print": 1,
+   "email": 1,
+   "report": 1,
+   "permlevel": 0
+  },
+  {
+   "role": "Employee",
+   "read": 1,
+   "print": 1,
+   "email": 1,
+   "report": 1,
+   "permlevel": 0
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
 }

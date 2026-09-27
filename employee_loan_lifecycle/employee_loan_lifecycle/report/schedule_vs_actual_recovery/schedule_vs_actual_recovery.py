@@ -71,7 +71,7 @@ def execute(filters=None):
         LEFT JOIN `tabLoan Recovery Detail` r
             ON r.parent = ss.name
             AND r.parenttype = 'Salary Slip'
-            AND r.parentfield = 'custom_loan_recoveries'
+            AND r.parentfield = 'loan_recoveries'
             AND r.loan = l.name
             AND r.schedule_period = s.period_no
         WHERE {" AND ".join(conditions)}
