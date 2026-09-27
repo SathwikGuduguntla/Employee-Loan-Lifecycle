@@ -10,257 +10,69 @@ app_license = "agpl-3.0"
 
 # required_apps = []
 
-# Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "employee_loan_lifecycle",
-# 		"logo": "/assets/employee_loan_lifecycle/logo.png",
-# 		"title": "Employee Loan Lifecycle",
-# 		"route": "/employee_loan_lifecycle",
-# 		"has_permission": "employee_loan_lifecycle.api.permission.has_app_permission"
-# 	}
-# ]
-
-# Includes in <head>
-# ------------------
-
-# include js, css files in header of desk.html
-# app_include_css = "/assets/employee_loan_lifecycle/css/employee_loan_lifecycle.css"
-# app_include_js = "/assets/employee_loan_lifecycle/js/employee_loan_lifecycle.js"
-
-# include js, css files in header of web template
-# web_include_css = "/assets/employee_loan_lifecycle/css/employee_loan_lifecycle.css"
-# web_include_js = "/assets/employee_loan_lifecycle/js/employee_loan_lifecycle.js"
-
-# include custom scss in every website theme (without file extension ".scss")
-# website_theme_scss = "employee_loan_lifecycle/public/scss/website"
-
-# include js, css files in header of web form
-# webform_include_js = {"doctype": "public/js/doctype.js"}
-# webform_include_css = {"doctype": "public/css/doctype.css"}
-
-# include js in page
-# page_js = {"page" : "public/js/file.js"}
-
-# include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
-# doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
-# doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
-# doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
-
-# Svg Icons
-# ------------------
-# include app icons in desk
-# app_include_icons = "employee_loan_lifecycle/public/icons.svg"
-
-# Home Pages
-# ----------
-
-# application home page (will override Website Settings)
-# home_page = "login"
-
-# website user home page (by Role)
-# role_home_page = {
-# 	"Role": "home_page"
-# }
-
-# Generators
-# ----------
-
-# automatically create page for each record of this doctype
-# website_generators = ["Web Page"]
-
-# automatically load and sync documents of this doctype from downstream apps
-# importable_doctypes = [doctype_1]
-
-# Jinja
-# ----------
-
-# add methods and filters to jinja environment
-# jinja = {
-# 	"methods": "employee_loan_lifecycle.utils.jinja_methods",
-# 	"filters": "employee_loan_lifecycle.utils.jinja_filters"
-# }
-
-# Installation
-# ------------
-
-# before_install = "employee_loan_lifecycle.install.before_install"
-# after_install = "employee_loan_lifecycle.install.after_install"
-
-# Uninstallation
-# ------------
-
-# before_uninstall = "employee_loan_lifecycle.uninstall.before_uninstall"
-# after_uninstall = "employee_loan_lifecycle.uninstall.after_uninstall"
-
-# Integration Setup
-# ------------------
-# To set up dependencies/integrations with other apps
-# Name of the app being installed is passed as an argument
-
-# before_app_install = "employee_loan_lifecycle.utils.before_app_install"
-# after_app_install = "employee_loan_lifecycle.utils.after_app_install"
-
-# Integration Cleanup
-# -------------------
-# To clean up dependencies/integrations with other apps
-# Name of the app being uninstalled is passed as an argument
-
-# before_app_uninstall = "employee_loan_lifecycle.utils.before_app_uninstall"
-# after_app_uninstall = "employee_loan_lifecycle.utils.after_app_uninstall"
-
-# Build
-# ------------------
-# To hook into the build process
-
-# after_build = "employee_loan_lifecycle.build.after_build"
-
-# Desk Notifications
-# ------------------
-# See frappe.core.notifications.get_notification_config
-
-# notification_config = "employee_loan_lifecycle.notifications.get_notification_config"
-
-# Awesome Bar
-# -----------
-# Extra search results: list of dicts with label, description, route, index.
-# route: ["List", "ToDo"], "/desk/docs/some/page", or "https://example.com"
-# awesomebar_search = ["employee_loan_lifecycle.search.awesomebar_results"]
-
 # Permissions
 # -----------
-# Permissions evaluated in scripted ways
+# Row-level access control (layer 2 of the 3-layer requirement — layer 1
+# is the doctype-level permissions rows in each doctype's JSON, layer 3 is
+# the permlevel on Loan Application's sanctioned_amount / eligibility
+# override fields). See DECISIONS.md for the full write-up.
 
-# permission_query_conditions = {
-# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
-# }
-#
-# has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
-# }
+permission_query_conditions = {
+    "Loan": "employee_loan_lifecycle.employee_loan_lifecycle.doctype.loan.loan.get_permission_query_conditions",
+    "Loan Application": "employee_loan_lifecycle.employee_loan_lifecycle.doctype."
+    "loan_application.loan_application.get_permission_query_conditions",
+    "Loan Disbursement": "employee_loan_lifecycle.employee_loan_lifecycle.doctype."
+    "loan_disbursement.loan_disbursement.get_permission_query_conditions",
+    "Loan Repayment": "employee_loan_lifecycle.employee_loan_lifecycle.doctype."
+    "loan_repayment.loan_repayment.get_permission_query_conditions",
+}
+
+has_permission = {
+    "Loan": "employee_loan_lifecycle.employee_loan_lifecycle.doctype.loan.loan.has_permission",
+    "Loan Application": "employee_loan_lifecycle.employee_loan_lifecycle.doctype."
+    "loan_application.loan_application.has_permission",
+    "Loan Disbursement": "employee_loan_lifecycle.employee_loan_lifecycle.doctype."
+    "loan_disbursement.loan_disbursement.has_permission",
+    "Loan Repayment": "employee_loan_lifecycle.employee_loan_lifecycle.doctype."
+    "loan_repayment.loan_repayment.has_permission",
+}
 
 # Document Events
 # ---------------
-# Hook on document methods and events
+# Salary Slip integration (payroll deduction, retrospective correction is
+# a separate whitelisted call — see salary_slip_hooks.py) and the
+# Employee-exit block.
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+    "Salary Slip": {
+        "validate": "employee_loan_lifecycle.salary_slip_hooks.preview_recoveries",
+        "on_submit": "employee_loan_lifecycle.salary_slip_hooks.apply_recoveries",
+        "on_cancel": "employee_loan_lifecycle.salary_slip_hooks.reverse_recoveries",
+    },
+    "Employee": {
+        "validate": "employee_loan_lifecycle.salary_slip_hooks.block_exit_with_outstanding_loan",
+    },
+}
 
-# Scheduled Tasks
-# ---------------
-
-# scheduler_events = {
-# 	"all": [
-# 		"employee_loan_lifecycle.tasks.all"
-# 	],
-# 	"daily": [
-# 		"employee_loan_lifecycle.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"employee_loan_lifecycle.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"employee_loan_lifecycle.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"employee_loan_lifecycle.tasks.monthly"
-# 	],
-# }
-
-# Testing
-# -------
-
-# before_tests = "employee_loan_lifecycle.install.before_tests"
-
-# Extend DocType Class
-# ------------------------------
-#
-# Specify custom mixins to extend the standard doctype controller.
-# extend_doctype_class = {
-# 	"Task": "employee_loan_lifecycle.custom.task.CustomTaskMixin"
-# }
-
-# Overriding Methods
-# ------------------------------
-#
-# override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "employee_loan_lifecycle.event.get_events"
-# }
-#
-# each overriding function accepts a `data` argument;
-# generated from the base implementation of the doctype dashboard,
-# along with any modifications made in other Frappe apps
-# override_doctype_dashboards = {
-# 	"Task": "employee_loan_lifecycle.task.get_dashboard_data"
-# }
-
-# exempt linked doctypes from being automatically cancelled
-#
-# auto_cancel_exempted_doctypes = ["Auto Repeat"]
-
-# Ignore links to specified DocTypes when deleting documents
-# -----------------------------------------------------------
-
-# ignore_links_on_delete = ["Communication", "ToDo"]
-
-# Request Events
-# ----------------
-# before_request = ["employee_loan_lifecycle.utils.before_request"]
-# after_request = ["employee_loan_lifecycle.utils.after_request"]
-
-# Job Events
-# ----------
-# before_job = ["employee_loan_lifecycle.utils.before_job"]
-# after_job = ["employee_loan_lifecycle.utils.after_job"]
-
-# User Data Protection
-# --------------------
-
-# user_data_fields = [
-# 	{
-# 		"doctype": "{doctype_1}",
-# 		"filter_by": "{filter_by}",
-# 		"redact_fields": ["{field_1}", "{field_2}"],
-# 		"partial": 1,
-# 	},
-# 	{
-# 		"doctype": "{doctype_2}",
-# 		"filter_by": "{filter_by}",
-# 		"partial": 1,
-# 	},
-# 	{
-# 		"doctype": "{doctype_3}",
-# 		"strict": False,
-# 	},
-# 	{
-# 		"doctype": "{doctype_4}"
-# 	}
-# ]
-
-# Authentication and authorization
-# --------------------------------
-
-# auth_hooks = [
-# 	"employee_loan_lifecycle.auth.validate"
-# ]
-
-# Automatically update python controller files with type annotations for this app.
-# export_python_type_annotations = True
-
-# default_log_clearing_doctypes = {
-# 	"Logging DocType Name": 30  # days to retain logs
-# }
-
-# Translation
+# Installation
 # ------------
-# List of apps whose translatable strings should be excluded from this app's translations.
-# ignore_translatable_strings_from = []
+# No after_install/after_migrate hook — the "Loan Recovery" Salary
+# Component salary_slip_hooks.py deducts against is created once by hand
+# instead (Payroll > Salary Component > New, Type = Deduction, name it
+# exactly "Loan Recovery"). See DECISIONS.md.
+
+# Fixtures
+# --------
+
+# No Workflow fixture — both Loan Application and Loan Disbursement are
+# driven entirely through whitelisted controller methods (take_action() /
+# finance_verify() / treasury_release() / mark_disbursed() /
+# cancel_disbursement()) plus client-script buttons, not the stock
+# Workflow doctype. See DECISIONS.md §1 and the Loan Disbursement addendum
+# for why: a Workflow's role-only "allowed" gate can't express the
+# verifier-≠-releaser check or trigger Payment Entry creation, so a
+# Workflow sitting alongside these methods let someone bypass both by
+# using the Workflow's own action buttons instead.
 
 fixtures = [
     {
@@ -268,19 +80,6 @@ fixtures = [
         "filters": [
             ["dt", "=", "Salary Slip"],
             ["fieldname", "=", "custom_loan_recoveries"],
-        ],
-    },
-    {
-        "dt": "Workflow",
-        "filters": [
-            [
-                "name",
-                "in",
-                [
-                    "Loan Application Workflow",
-                    "Loan Disbursement Workflow",
-                ],
-            ],
         ],
     },
 ]
