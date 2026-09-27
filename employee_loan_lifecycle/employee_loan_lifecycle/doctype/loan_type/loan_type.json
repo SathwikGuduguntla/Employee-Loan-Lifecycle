@@ -1,0 +1,173 @@
+{
+ "actions": [],
+ "allow_copy": 0,
+ "allow_events_in_timeline": 0,
+ "allow_import": 1,
+ "allow_rename": 1,
+ "creation": "2026-09-26 12:33:22.537064",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_y77z",
+  "loan_type_name",
+  "company",
+  "interest_mode",
+  "rate_of_interest",
+  "column_break_interest",
+  "max_tenure_months",
+  "max_multiple_of_gross",
+  "min_service_months",
+  "max_active_loans",
+  "section_break_accounts",
+  "pre_closure_charge_percent",
+  "loan_account",
+  "interest_account",
+  "writeoff_account",
+  "disabled"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_y77z",
+   "fieldtype": "Section Break",
+   "label": "Loan Type Details"
+  },
+  {
+   "fieldname": "loan_type_name",
+   "fieldtype": "Data",
+   "label": "Loan Type Name",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "interest_mode",
+   "fieldtype": "Select",
+   "label": "Interest Mode",
+   "options": "Flat\nReducing Balance",
+   "default": "Reducing Balance",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rate_of_interest",
+   "fieldtype": "Percent",
+   "label": "Annual Rate of Interest",
+   "description": "Annual interest rate applicable to this loan type.",
+   "default": "0",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_interest",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "max_tenure_months",
+   "fieldtype": "Int",
+   "label": "Maximum Tenure (Months)",
+   "description": "Maximum repayment tenure permitted for this loan type.",
+   "reqd": 1
+  },
+  {
+   "fieldname": "max_multiple_of_gross",
+   "fieldtype": "Float",
+   "label": "Maximum Multiple of Gross Salary",
+   "description": "Maximum loan amount as a multiple of monthly gross salary.",
+   "reqd": 1
+  },
+  {
+   "fieldname": "min_service_months",
+   "fieldtype": "Int",
+   "label": "Minimum Service (Months)",
+   "description": "Minimum completed service required before applying.",
+   "default": 0,
+   "reqd": 1
+  },
+  {
+   "fieldname": "max_active_loans",
+   "fieldtype": "Int",
+   "label": "Maximum Active Loans",
+   "description": "Maximum concurrent loans of this type per employee.",
+   "default": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_accounts",
+   "fieldtype": "Section Break",
+   "label": "Charges and Accounts"
+  },
+  {
+   "fieldname": "pre_closure_charge_percent",
+   "fieldtype": "Percent",
+   "label": "Pre-closure Charge (%)",
+   "description": "Charge applied when the loan is foreclosed before maturity.",
+   "default": "0"
+  },
+  {
+   "fieldname": "loan_account",
+   "fieldtype": "Link",
+   "label": "Loan Account",
+   "options": "Account",
+   "description": "Receivable account used to track outstanding loan principal.",
+   "reqd": 1
+  },
+  {
+   "fieldname": "interest_account",
+   "fieldtype": "Link",
+   "label": "Interest Account",
+   "options": "Account",
+   "description": "Income account used to record loan interest.",
+   "reqd": 1
+  },
+  {
+   "fieldname": "writeoff_account",
+   "fieldtype": "Link",
+   "label": "Write-off Account",
+   "options": "Account",
+   "description": "Expense account used to record loan write-offs.",
+   "reqd": 1
+  },
+  {
+   "fieldname": "disabled",
+   "fieldtype": "Check",
+   "label": "Disabled",
+   "default": "0",
+   "in_list_view": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-26 12:33:22.537064",
+ "modified_by": "Administrator",
+ "module": "Employee Loan Lifecycle",
+ "name": "Loan Type",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

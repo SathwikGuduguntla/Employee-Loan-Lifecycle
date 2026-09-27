@@ -1,0 +1,236 @@
+{
+  "doctype": "DocType",
+  "name": "Loan Application",
+  "module": "Employee Loan Lifecycle",
+  "autoname": "LA-.YYYY.-.#####",
+  
+  "naming_rule": "Expression",
+  "engine": "InnoDB",
+  "allow_rename": 1,
+  "allow_bulk_edit": 1,
+  "is_submittable": 1,
+  "field_order": [
+    "applicant_section",
+    "employee",
+    "employee_name",
+    "department",
+    "employee_grade",
+    "company",
+    "request_section",
+    "loan_type",
+    "requested_amount",
+    "sanctioned_amount",
+    "tenure_months",
+    "first_deduction_month",
+    "purpose",
+    "board_resolution_ref",
+    "eligibility_section",
+    "monthly_gross",
+    "eligibility_status",
+    "eligibility_notes",
+    "eligibility_override",
+    "override_reason",
+    "approval_section",
+    "approval_rule",
+    "current_step",
+    "status",
+    "approval_log",
+    "loan",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "applicant_section",
+      "fieldtype": "Section Break",
+      "label": "Applicant"
+    },
+    {
+      "fieldname": "employee",
+      "fieldtype": "Link",
+      "label": "Employee",
+      "options": "Employee",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "employee_name",
+      "fieldtype": "Data",
+      "label": "Employee Name",
+      "fetch_from": "employee.employee_name"
+    },
+    {
+      "fieldname": "department",
+      "fieldtype": "Link",
+      "label": "Department",
+      "options": "Department",
+      "fetch_from": "employee.department"
+    },
+    {
+      "fieldname": "employee_grade",
+      "fieldtype": "Link",
+      "label": "Employee Grade",
+      "options": "Employee Grade",
+      "fetch_from": "employee.grade"
+    },
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "request_section",
+      "fieldtype": "Section Break",
+      "label": "Loan Request"
+    },
+    {
+      "fieldname": "loan_type",
+      "fieldtype": "Link",
+      "label": "Loan Type",
+      "options": "Loan Type",
+      "reqd": 1
+    },
+    {
+      "fieldname": "requested_amount",
+      "fieldtype": "Currency",
+      "label": "Requested Amount",
+      "reqd": 1
+    },
+    {
+      "fieldname": "sanctioned_amount",
+      "fieldtype": "Currency",
+      "label": "Sanctioned Amount",
+      "permlevel": 1
+    },
+    {
+      "fieldname": "tenure_months",
+      "fieldtype": "Int",
+      "label": "Tenure (Months)",
+      "reqd": 1
+    },
+    {
+      "fieldname": "first_deduction_month",
+      "fieldtype": "Date",
+      "label": "First Deduction Month",
+      "reqd": 1
+    },
+    {
+      "fieldname": "purpose",
+      "fieldtype": "Small Text",
+      "label": "Purpose"
+    },
+    {
+      "fieldname": "board_resolution_ref",
+      "fieldtype": "Data",
+      "label": "Board Resolution Reference"
+    },
+    {
+      "fieldname": "eligibility_section",
+      "fieldtype": "Section Break",
+      "label": "Eligibility"
+    },
+    {
+      "fieldname": "monthly_gross",
+      "fieldtype": "Currency",
+      "label": "Monthly Gross"
+    },
+    {
+      "fieldname": "eligibility_status",
+      "fieldtype": "Select",
+      "label": "Eligibility Status",
+      "options": "Not Checked\nEligible\nIneligible",
+      "default": "Not Checked"
+    },
+    {
+      "fieldname": "eligibility_notes",
+      "fieldtype": "Small Text",
+      "label": "Eligibility Notes"
+    },
+    {
+      "fieldname": "eligibility_override",
+      "fieldtype": "Check",
+      "label": "Eligibility Override",
+      "default": "0",
+      "permlevel": 1
+    },
+    {
+      "fieldname": "override_reason",
+      "fieldtype": "Small Text",
+      "label": "Override Reason",
+      "permlevel": 1
+    },
+    {
+      "fieldname": "approval_section",
+      "fieldtype": "Section Break",
+      "label": "Approval"
+    },
+    {
+      "fieldname": "approval_rule",
+      "fieldtype": "Link",
+      "label": "Approval Rule",
+      "options": "Loan Approval Rule"
+    },
+    {
+      "fieldname": "current_step",
+      "fieldtype": "Int",
+      "label": "Current Step"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nPending Approval\nApproved\nRejected\nReturned",
+      "default": "Draft",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "approval_log",
+      "fieldtype": "Table",
+      "label": "Approval Log",
+      "options": "Loan Approval Log"
+    },
+    {
+      "fieldname": "loan",
+      "fieldtype": "Link",
+      "label": "Loan",
+      "options": "Loan"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Loan Application",
+      "print_hide": 1,
+      "read_only": 1,
+      "search_index": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1,
+      "amend": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1,
+      "email": 1,
+      "share": 1
+    }
+  ],
+  "links": [],
+  "actions": [],
+  "states": [],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 1,
+  "row_format": "Dynamic",
+  "rows_threshold_for_grid_search": 20,
+  "sort_field": "creation",
+  "sort_order": "DESC"
+}

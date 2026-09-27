@@ -1,0 +1,155 @@
+{
+  "actions": [],
+  "allow_bulk_edit": 1,
+  "allow_rename": 1,
+  "name": "Loan Repayment",
+  "autoname": "LR-.YYYY.-.#####",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "repayment_details_section",
+    "loan",
+    "employee",
+    "repayment_date",
+    "repayment_type",
+    "amount",
+    "allocation_section",
+    "allocated_interest",
+    "allocated_principal",
+    "allocated_arrears",
+    "payment_details_section",
+    "mode_of_payment",
+    "reference_no",
+    "payment_entry",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "repayment_details_section",
+      "fieldtype": "Section Break",
+      "label": "Repayment Details"
+    },
+    {
+      "fieldname": "loan",
+      "fieldtype": "Link",
+      "label": "Loan",
+      "options": "Loan",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "employee",
+      "fieldtype": "Link",
+      "label": "Employee",
+      "options": "Employee",
+      "fetch_from": "loan.employee",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "repayment_date",
+      "fieldtype": "Date",
+      "label": "Repayment Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "repayment_type",
+      "fieldtype": "Select",
+      "label": "Repayment Type",
+      "options": "Regular\nLump Sum\nArrears Catch-up\nForeclosure",
+      "default": "Regular",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "amount",
+      "fieldtype": "Currency",
+      "label": "Amount",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "allocation_section",
+      "fieldtype": "Section Break",
+      "label": "Payment Allocation"
+    },
+    {
+      "fieldname": "allocated_interest",
+      "fieldtype": "Currency",
+      "label": "Allocated Interest",
+      "read_only": 1
+    },
+    {
+      "fieldname": "allocated_principal",
+      "fieldtype": "Currency",
+      "label": "Allocated Principal",
+      "read_only": 1
+    },
+    {
+      "fieldname": "allocated_arrears",
+      "fieldtype": "Currency",
+      "label": "Allocated Arrears",
+      "read_only": 1
+    },
+    {
+      "fieldname": "payment_details_section",
+      "fieldtype": "Section Break",
+      "label": "Payment Details"
+    },
+    {
+      "fieldname": "mode_of_payment",
+      "fieldtype": "Link",
+      "label": "Mode of Payment",
+      "options": "Mode of Payment"
+    },
+    {
+      "fieldname": "reference_no",
+      "fieldtype": "Data",
+      "label": "Reference No"
+    },
+    {
+      "fieldname": "payment_entry",
+      "fieldtype": "Link",
+      "label": "Payment Entry",
+      "options": "Payment Entry",
+      "read_only": 1
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Loan Repayment",
+      "print_hide": 1,
+      "read_only": 1,
+      "search_index": 1
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "links": [],
+  "module": "Employee Loan Lifecycle",
+  "naming_rule": "Expression",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "submit": 1,
+      "write": 1
+    }
+  ],
+  "row_format": "Dynamic",
+  "rows_threshold_for_grid_search": 20,
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": []
+}
