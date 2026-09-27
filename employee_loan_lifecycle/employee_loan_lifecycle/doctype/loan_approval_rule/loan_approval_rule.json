@@ -1,0 +1,113 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "creation": "2026-09-26 12:33:37.702682",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_4ihj",
+  "company",
+  "name",
+  "loan_type",
+  "employee_grade",
+  "min_amount",
+  "max_amount",
+  "require_board_resolution",
+  "section_break_approvers",
+  "approvers"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_4ihj",
+   "fieldtype": "Section Break",
+   "label": "Approval Rule Details"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "loan_type",
+   "fieldtype": "Link",
+   "label": "Loan Type",
+   "options": "Loan Type",
+   "description": "Leave blank to apply this rule to every loan type.",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "employee_grade",
+   "fieldtype": "Link",
+   "label": "Employee Grade",
+   "options": "Employee Grade",
+   "description": "Leave blank to apply this rule to every employee grade.",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "min_amount",
+   "fieldtype": "Currency",
+   "label": "Minimum Amount",
+   "description": "Inclusive lower limit of the loan amount.",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "max_amount",
+   "fieldtype": "Currency",
+   "label": "Maximum Amount",
+   "description": "Inclusive upper limit of the loan amount.",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "require_board_resolution",
+   "fieldtype": "Check",
+   "label": "Require Board Resolution",
+   "default": "0",
+   "description": "Require a board resolution reference for this approval band."
+  },
+  {
+   "fieldname": "section_break_approvers",
+   "fieldtype": "Section Break",
+   "label": "Approval Chain"
+  },
+  {
+   "fieldname": "approvers",
+   "fieldtype": "Table",
+   "label": "Approvers",
+   "options": "Loan Approval Step",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-26 12:33:37.702682",
+ "modified_by": "Administrator",
+ "module": "Employee Loan Lifecycle",
+ "name": "Loan Approval Rule",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
