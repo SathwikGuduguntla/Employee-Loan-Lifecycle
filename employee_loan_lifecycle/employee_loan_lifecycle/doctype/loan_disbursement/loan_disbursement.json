@@ -1,0 +1,181 @@
+{
+  "actions": [],
+  "allow_bulk_edit": 1,
+  "allow_rename": 1,
+  "autoname": "LD-.YYYY.-.#####",
+  "doctype": "DocType",
+  "name": "Loan Disbursement",
+  "engine": "InnoDB",
+  "field_order": [
+    "disbursement_details_section",
+    "loan",
+    "employee",
+    "disbursement_date",
+    "amount",
+    "tranche_no",
+    "bank_account",
+    "mode_of_payment",
+    "reference_no",
+    "reference_date",
+    "segregation_section",
+    "verified_by",
+    "verified_on",
+    "released_by",
+    "released_on",
+    "status",
+    "payment_entry",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "disbursement_details_section",
+      "fieldtype": "Section Break",
+      "label": "Disbursement Details"
+    },
+    {
+      "fieldname": "loan",
+      "fieldtype": "Link",
+      "label": "Loan",
+      "options": "Loan",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "employee",
+      "fieldtype": "Link",
+      "label": "Employee",
+      "options": "Employee",
+      "fetch_from": "loan.employee",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "disbursement_date",
+      "fieldtype": "Date",
+      "label": "Disbursement Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "amount",
+      "fieldtype": "Currency",
+      "label": "Amount",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "tranche_no",
+      "fieldtype": "Int",
+      "label": "Tranche No",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "bank_account",
+      "fieldtype": "Link",
+      "label": "Bank Account",
+      "options": "Bank Account",
+      "reqd": 1
+    },
+    {
+      "fieldname": "mode_of_payment",
+      "fieldtype": "Link",
+      "label": "Mode of Payment",
+      "options": "Mode of Payment",
+      "reqd": 1
+    },
+    {
+      "fieldname": "reference_no",
+      "fieldtype": "Data",
+      "label": "Reference No"
+    },
+    {
+      "fieldname": "reference_date",
+      "fieldtype": "Date",
+      "label": "Reference Date"
+    },
+    {
+      "fieldname": "segregation_section",
+      "fieldtype": "Section Break",
+      "label": "Segregation of Duties"
+    },
+    {
+      "fieldname": "verified_by",
+      "fieldtype": "Link",
+      "label": "Verified By (Finance)",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "verified_on",
+      "fieldtype": "Datetime",
+      "label": "Verified On",
+      "read_only": 1
+    },
+    {
+      "fieldname": "released_by",
+      "fieldtype": "Link",
+      "label": "Released By (Treasury)",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "released_on",
+      "fieldtype": "Datetime",
+      "label": "Released On",
+      "read_only": 1
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nFinance Verified\nTreasury Released\nDisbursed\nCancelled",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "payment_entry",
+      "fieldtype": "Link",
+      "label": "Payment Entry",
+      "options": "Payment Entry",
+      "read_only": 1
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Loan Disbursement",
+      "print_hide": 1,
+      "read_only": 1,
+      "search_index": 1
+    }
+  ],
+  "grid_page_length": 50,
+  "index_web_pages_for_search": 1,
+  "is_submittable": 1,
+  "links": [],
+  "module": "Employee Loan Lifecycle",
+  "naming_rule": "Expression",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "submit": 1,
+      "write": 1
+    }
+  ],
+  "row_format": "Dynamic",
+  "rows_threshold_for_grid_search": 20,
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": []
+}
