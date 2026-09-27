@@ -1,0 +1,99 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 0,
+ "allow_rename": 0,
+ "creation": "2026-09-26 12:51:06.142609",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_9zwn",
+  "step",
+  "approver",
+  "acted_for",
+  "action",
+  "from_status",
+  "to_status",
+  "comment",
+  "acted_on"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_9zwn",
+   "fieldtype": "Section Break",
+   "label": "Approval History"
+  },
+  {
+   "fieldname": "step",
+   "fieldtype": "Int",
+   "label": "Step",
+   "description": "The step of the approval chain that was acted on.",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "approver",
+   "fieldtype": "Link",
+   "label": "Approver",
+   "options": "User",
+   "description": "The user who actually performed the action.",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "acted_for",
+   "fieldtype": "Link",
+   "label": "Acted For",
+   "options": "User",
+   "description": "The original approver, set only when a delegate acted."
+  },
+  {
+   "fieldname": "action",
+   "fieldtype": "Select",
+   "label": "Action",
+   "options": "Approved\nRejected\nReturned",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "from_status",
+   "fieldtype": "Data",
+   "label": "From Status",
+   "reqd": 1
+  },
+  {
+   "fieldname": "to_status",
+   "fieldtype": "Data",
+   "label": "To Status",
+   "reqd": 1
+  },
+  {
+   "fieldname": "comment",
+   "fieldtype": "Small Text",
+   "label": "Comment",
+   "description": "Mandatory when the action is Rejected or Returned."
+  },
+  {
+   "fieldname": "acted_on",
+   "fieldtype": "Datetime",
+   "label": "Acted On",
+   "reqd": 1,
+   "in_list_view": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-09-26 12:51:06.142609",
+ "modified_by": "Administrator",
+ "module": "Employee Loan Lifecycle",
+ "name": "Loan Approval Log",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "acted_on",
+ "sort_order": "DESC",
+ "states": []
+}

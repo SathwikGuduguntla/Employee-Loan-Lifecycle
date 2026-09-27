@@ -1,0 +1,12 @@
+{
+  "doctype": "Report",
+  "name": "Schedule vs Actual Recovery",
+  "report_name": "Schedule vs Actual Recovery",
+  "ref_doctype": "Loan",
+  "is_standard": "Yes",
+  "module": "Employee Loan Lifecycle",
+  "report_type": "Script Report",
+  "letter_head": null,
+  "add_total_row": 0,
+  "disabled": 0
+}

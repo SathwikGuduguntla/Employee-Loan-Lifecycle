@@ -1,0 +1,12 @@
+{
+  "doctype": "Report",
+  "name": "Loan Outstanding Aging",
+  "report_name": "Loan Outstanding Aging",
+  "ref_doctype": "Loan",
+  "is_standard": "Yes",
+  "module": "Employee Loan Lifecycle",
+  "report_type": "Script Report",
+  "letter_head": null,
+  "add_total_row": 1,
+  "disabled": 0
+}
