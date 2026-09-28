@@ -37,6 +37,16 @@ ALL_SEEING_ROLES = ("System Manager", "Finance Manager", "CFO")
 
 
 class Loan(Document):
+    # HRMS registers doc_events["Loan"]["validate"] = validate_loan_repay_from_salary
+    # for the lending app's Loan, and it reads applicant_type, applicant,
+    # repay_from_salary and is_term_loan. This Loan has none of them, so every
+    # save raised AttributeError. Class-level defaults make that hook a no-op without
+    # editing HRMS (DECISIONS.md).
+    applicant_type = None
+    repay_from_salary = 0
+    applicant = None
+    is_term_loan = 1
+
     # ------------------------------------------------------------------
     # Lifecycle
     # ------------------------------------------------------------------
