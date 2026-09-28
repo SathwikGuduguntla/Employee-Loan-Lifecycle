@@ -17,17 +17,31 @@ function take_action(frm, action) {
 		frappe.call({
 			method:
 				"employee_loan_lifecycle.employee_loan_lifecycle.doctype.loan_application.loan_application.take_action",
-			args: { docname: frm.doc.name, action, comment },
+			args: {
+				name: frm.doc.name,
+				action: action,
+				comment: comment || null,
+			},
 			freeze: true,
-			callback: () => frm.reload_doc(),
+			freeze_message: __("Processing {0}...", [action]),
+			callback: (r) => {
+				if (!r.exc) {
+					frm.reload_doc();
+				}
+			},
 		});
 	};
 
-	// Server enforces permission regardless of what the button shows;
-	// this is only for convenience.
 	if (needs_comment) {
 		frappe.prompt(
-			{ fieldname: "comment", fieldtype: "Small Text", label: __("Comment"), reqd: 1 },
+			[
+				{
+					fieldname: "comment",
+					fieldtype: "Small Text",
+					label: __("Comment"),
+					reqd: 1,
+				},
+			],
 			(values) => run(values.comment),
 			__(action)
 		);

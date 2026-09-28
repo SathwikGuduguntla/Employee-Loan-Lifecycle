@@ -561,3 +561,8 @@ def has_permission(doc, ptype="read", user=None):
                 return True
 
     return False
+@frappe.whitelist()
+def take_action(name, action, comment=None):
+    """API wrapper for Loan Application approval actions."""
+    doc = frappe.get_doc("Loan Application", name)
+    return doc.take_action(action=action, comment=comment)
